@@ -2,25 +2,111 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0b0b0f;
+  --muted: #f4f4f5;
+  --muted-foreground: #52525b;
+  --border: rgba(0, 0, 0, 0.08);
+
+  --brand: #f97316; /* orange-500 */
+  --brand-2: #fb923c; /* orange-400 */
+  --brand-ink: #0b0b0f;
+
+  --card: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(0, 0, 0, 0.08);
+
+  --ring: rgba(249, 115, 22, 0.45);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #07070a;
+    --foreground: #f4f4f5;
+    --muted: #0f0f14;
+    --muted-foreground: #a1a1aa;
+    --border: rgba(255, 255, 255, 0.12);
+
+    --card: rgba(10, 10, 14, 0.75);
+    --card-border: rgba(255, 255, 255, 0.12);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+::selection {
+  background: rgba(249, 115, 22, 0.25);
+}
+
+.container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1200px;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-page {
+    padding-inline: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-page {
+    padding-inline: 1.5rem;
+  }
+}
+
+.glass {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(12px);
+}
+
+.grid-mask {
+  background-image: radial-gradient(
+      rgba(249, 115, 22, 0.08) 1px,
+      transparent 1px
+    ),
+    radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-position:
+    0 0,
+    18px 18px;
+  background-size: 36px 36px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
